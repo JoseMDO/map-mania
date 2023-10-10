@@ -1,7 +1,5 @@
 let gMap;
 
-
-
 async function initMap() {
     try{
         const response = await fetch('https://map-mania-json.azurewebsites.net/api/favorite-places');
