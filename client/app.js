@@ -1,42 +1,42 @@
 let gMap;
 
+
+
 async function initMap() {
-    // The location of Uluru
-    const position1 = { lat: 41.5250, lng: -88.0817 };
-    const position2 = { lat: 40.4168, lng: -3.7038 };
-    // Request needed libraries.
+    try{
+        const response = await fetch('https://map-mania-json.azurewebsites.net/api/favorite-places');
+        const result  = await response.json();
+        console.log(result);
+    } catch(err) {
+        console.log(err)
+    }
+
     //@ts-ignore
     const { Map } = await google.maps.importLibrary("maps");
-    // const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
   
     // The map, centered at Uluru
     gMap = new Map(document.getElementById("myMapID"), {
       zoom: 4,
-      center: position1,
+      center: {lat: 41.5250, lng: -88.0817},
       mapId: "DEMO_MAP_ID",
     });
   
     // The marker, positioned at Uluru
-    const marker1 = new google.maps.Marker({
-      map: gMap,
-      position: position1,
-      title: "Joliet",
-    });
 
-    const marker2 = new google.maps.Marker({
-        map: gMap,
-        position: position2,
-        title: "Madrid",
-        icon: 'https://maps.google.com/mapfiles/kml/shapes/info-i_maps.png'
-    })
+    // const marker2 = new google.maps.Marker({
+    //     map: gMap,
+    //     position: position2,
+    //     title: "Madrid",
+    //     icon: "https://img.icons8.com/cotton/40/parthenon--v1.png"
+    // })
 
-    const infoWindow = new google.maps.InfoWindow({
-        content: 'Madrid, Spain',
+    // const infoWindow = new google.maps.InfoWindow({
+    //     content: 'This is my hometown! I currently live here and have lived here for the last 20 years!',
 
-    });
-    marker2.addListener('click', function () {
-        infoWindow.open(gMap, marker2);
-    });
+    // });
+    // marker2.addListener('click', function () {
+    //     infoWindow.open(gMap, marker2);
+    // });
 
     google.maps.event.addListener(gMap, 'bounds_changed', function () {
         updateGame();
