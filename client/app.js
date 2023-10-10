@@ -26,7 +26,17 @@ async function initMap() {
                 position: {lat:location.location.lat, lng:location.location.lng},
                 map: gMap,
                 title: location.title,
-                icon: location.iconImage
+                icon: location.iconImage,
+                content: location.content
+            })
+            const infoWindow = new google.maps.InfoWindow({
+                content: marker.content
+            });
+            marker.addListener('click', () => {
+                infoWindow.open({
+                    anchor: marker,
+                    map: gMap
+                })
             })
         });
     }
