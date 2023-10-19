@@ -7,7 +7,7 @@ async function initMap() {
         const result  = await response.json();
         locationsArray = result;
     } catch(err) {
-        console.log(err)
+        console.log(err);
     }
 
     //@ts-ignore
@@ -41,38 +41,22 @@ async function initMap() {
         });
     }
   
-
-    // const marker2 = new google.maps.Marker({
-    //     map: gMap,
-    //     position: position2,
-    //     title: "Madrid",
-    //     icon: "https://img.icons8.com/cotton/40/parthenon--v1.png"
-    // })
-
-    // const infoWindow = new google.maps.InfoWindow({
-    //     content: 'This is my hometown! I currently live here and have lived here for the last 20 years!',
-
-    // });
-    // marker2.addListener('click', function () {
-    //     infoWindow.open(gMap, marker2);
-    // });
-
-    google.maps.event.addListener(gMap, 'bounds_changed', function () {
+    google.maps.event.addListener(gMap, 'idle', function () {
         updateGame();
     });
 
     function updateGame() {
-        console.log('Function updateGame() google-maps-step-03!');
+        console.log('Function updateGame()');
         const zoomLevel = gMap.getZoom();
         var inBounds = false;
 
         if(gMap.getBounds().contains({lat: 41.5250, lng:-88.0817})) {
             inBounds = true;
         }
-        console.log("inbounds:" + inBounds + " xoomLevel: "+zoomLevel);
+        console.log("inbounds:" + inBounds + " zoomLevel: "+zoomLevel);
     }
     mapLocations(locationsArray);
   }
   
 initMap();
-  
+   
